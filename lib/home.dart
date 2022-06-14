@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
+import 'package:bmi_calculator/bmi_result_Screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,9 +12,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isMAle = true;
-  double height=120.0;
-  int wieght=40;
-  int age=20;
+  double height = 120.0;
+  int wieght = 40;
+  int age = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    isMAle = false;
+                    setState(() {
+                      isMAle = false;
+                    });
                   },
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: isMAle ? Colors.grey[300] : Colors.blue),
+                        color: !isMAle ? Colors.blue : Colors.grey[300]),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -143,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       min: 80.0,
                       onChanged: (value) {
                         setState(() {
-                          height=value;
+                          height = value;
                         });
                         print(value.round());
                       })
@@ -171,8 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 25.0, fontWeight: FontWeight.bold),
                         ),
                         Text(
-"${age}",
-
+                          "${age}",
                           style: TextStyle(
                               fontSize: 30.0, fontWeight: FontWeight.bold),
                         ),
@@ -180,19 +184,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
+                              heroTag: 'age-',
                               onPressed: () {
-setState(() {
-  age=age-1;
-});
-
+                                setState(() {
+                                  age = age - 1;
+                                });
                               },
                               mini: true,
                               child: Icon(Icons.remove),
                             ),
                             FloatingActionButton(
-                              onPressed: () {setState(() {
-  age=age+1;
-});},
+                              heroTag: 'age+',
+                              onPressed: () {
+                                setState(() {
+                                  age = age + 1;
+                                });
+                              },
                               mini: true,
                               child: Icon(Icons.add),
                             ),
@@ -227,22 +234,21 @@ setState(() {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
+                              heroTag: 'wieght-',
                               onPressed: () {
-
-setState(() {
-  wieght=wieght-1;
-});
-
+                                setState(() {
+                                  wieght = wieght - 1;
+                                });
                               },
                               mini: true,
                               child: Icon(Icons.remove),
                             ),
                             FloatingActionButton(
+                              heroTag: 'wieght+',
                               onPressed: () {
-setState(() {
-  wieght=wieght+1;
-});
-
+                                setState(() {
+                                  wieght = wieght + 1;
+                                });
                               },
                               mini: true,
                               child: Icon(Icons.add),
@@ -262,7 +268,15 @@ setState(() {
             color: Colors.blue,
             child: MaterialButton(
               height: 50.0,
-              onPressed: () {},
+              onPressed: () {
+                var result = wieght / pow(height / 100, 2);
+                print(result.round());
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BMIResultScreen(result: result,age: age,isMAle: isMAle,),
+                    ));
+              },
               child: Text(
                 'CALCULATE',
                 style: TextStyle(color: Colors.white),
