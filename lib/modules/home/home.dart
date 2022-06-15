@@ -2,7 +2,7 @@
 
 import 'dart:math';
 
-import 'package:bmi_calculator/bmi_result_Screen.dart';
+import 'package:bmi_calculator/modules/bmi_result/bmi_result_Screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -274,7 +274,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BMIResultScreen(result: result,age: age,isMAle: isMAle,),
+                      builder: (context) => BMIResultScreen(
+                        result: result,
+                        age: age,
+                        isMAle: isMAle,
+                      ),
                     ));
               },
               child: Text(

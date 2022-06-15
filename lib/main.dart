@@ -1,4 +1,5 @@
-import 'package:bmi_calculator/home.dart';
+import 'package:bmi_calculator/modules/home/home.dart';
+import 'package:bmi_calculator/modules/login/Login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
