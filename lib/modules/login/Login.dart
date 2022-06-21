@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var formkey = GlobalKey<FormState>();
 
-  bool isPasswordShow=true;
+  bool isPasswordShow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -82,31 +82,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                      defultTextField(
-                      controller: passwordController,
-                    validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Password must not be empty';
-                        }
-                        return null;
-                      },
-                      onSubmit: (value) {
-                        print(value);
-                      },
-                      onChange: (value) {
-                        print(value);
-                      },
-                      type: TextInputType.emailAddress,
-                      text: 'Password',
-                      prefixIcon: Icons.lock,
-                      obscureText: isPasswordShow,
-                      suffixIcon:isPasswordShow? Icons.visibility:Icons.visibility_off,
-                      suffoxPressed: (){
-                        setState(() {
-                          isPasswordShow=!isPasswordShow;
-                        });
-                      }
-                    ),
+                    defultTextField(
+                        controller: passwordController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Password must not be empty';
+                          }
+                          return null;
+                        },
+                        onSubmit: (value) {
+                          print(value);
+                        },
+                        onChange: (value) {
+                          print(value);
+                        },
+                        type: TextInputType.emailAddress,
+                        text: 'Password',
+                        prefixIcon: Icons.lock,
+                        obscureText: isPasswordShow,
+                        suffixIcon: isPasswordShow
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        suffoxPressed: () {
+                          setState(() {
+                            isPasswordShow = !isPasswordShow;
+                          });
+                        }),
                     // TextFormField(
                     //   validator: (value) {
                     //     if (value!.isEmpty) {
